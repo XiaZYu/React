@@ -8,7 +8,10 @@ export const CarContext = React.createContext({
     removeItem: null,
     removerAll: null
 });
-export const CarProvider = ({children}) => {
+export const CarProvider = ({
+    allMeals = [],
+    children
+}) => {
 
     const [carList, setCarList] = useState([])
 
@@ -23,43 +26,48 @@ export const CarProvider = ({children}) => {
         return carList.map(item => item.amount).reduce((a, b) => a + b, 0) ?? 0
     }, [carList])
 
-    const addItem = (item) => {
-        const findProduct = carList.find(product => product.id === item.id)
+    const addItem = (mealId) => {
+        const findProduct = carList.find(product => product.id === mealId)
         // 如果存在同样的商品，就只增加数量
         if (!findProduct) {
+            const mealInfo = allMeals.find(item => item.id === mealId)
             setCarList(list => [
                 ...list,
                 {
-                    ...item,
+                    ...mealInfo,
                     amount: 1
                 }
             ])
         } else {
-            setCarList(list => [
-                ...list.filter(product => product.id !== item.id),
-                {
-                    ...findProduct,
-                    amount: findProduct.amount + 1
+            setCarList(list => list.map(item => {
+                if (item.id === mealId) {
+                    return {
+                        ...item,
+                        amount: item.amount + 1
+                    }
                 }
-            ])
+                return item
+            }))
         }
     }
 
-    const removeItem = (item) =>{
-        const findProduct = carList.find(product => product.id === item.id)
+    const removeItem = (mealId) =>{
+        const findProduct = carList.find(product => product.id === mealId)
         if(findProduct) {
             // 如果现存商品数量为 1，直接删掉
             if (findProduct.amount === 1) {
-                setCarList(list => list.filter(product => product.id !== item.id))
+                setCarList(list => list.filter(product => product.id !== mealId))
             } else {
                 // 否则减去数量 1
-                setCarList(list => [
-                    ...list.filter(product => product.id !== item.id),
-                    {
-                        ...findProduct,
-                        amount: findProduct.amount - 1
+                setCarList(list => list.map(item => {
+                    if (item.id === mealId) {
+                        return {
+                            ...item,
+                            amount: item.amount - 1
+                        }
                     }
-                ])
+                    return item
+                }))
             }
         }
     }
@@ -70,6 +78,7 @@ export const CarProvider = ({children}) => {
 
     return (
         <CarContext.Provider value={{
+            allMeals,
             totalAmount,
             totalPrice,
             carList,

@@ -4,7 +4,7 @@ const Meals = ({
     list
 }) => {
     return (
-        <div className="absolute top-8 bottom-0 overflow-auto">
+        <div className="absolute top-8 bottom-0 overflow-auto pb-32">
             {
                 list.map((item) => (
                     <Meal

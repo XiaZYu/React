@@ -1,10 +1,15 @@
-import React, {useContext} from 'react';
+import React, {useContext, useMemo} from 'react';
 import {CarContext} from "../Store/CarContext";
 
 const Counter = ({
     id
 }) => {
-    const {addItem, removeItem} = useContext(CarContext);
+    const {carList, addItem, removeItem} = useContext(CarContext);
+    
+    const mealAmount = useMemo(() => {
+        return carList.find(item => item.id === id)?.amount
+    }, [carList, id])
+    
     return (
         <div className="flex">
         {mealAmount && (

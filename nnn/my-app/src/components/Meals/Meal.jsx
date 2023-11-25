@@ -1,6 +1,5 @@
 import React from 'react';
 import Counter from "../UI/Counter";
-import clsx from "clsx";
 
 const Meal = ({
     id,
@@ -10,7 +9,7 @@ const Meal = ({
     price,
 }) => {
     return (
-        <div className="flex p-2 border-b border-neutral-100 text-align">
+        <div className="flex p-2 gap-2">
             <div className="w-1/3 h-full">
                 <img src={image} alt={title}/>
             </div>

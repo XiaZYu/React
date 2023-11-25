@@ -6,7 +6,7 @@ import CarDetails from "./CarDetails";
 const CarCard = () => {
 
     const {carList, totalPrice, totalAmount} = useContext(CarContext);
-    const [display, setDisplay] = React.useState("hidden");
+    const [display, setDisplay] = React.useState(false);
 
     return (
         <>
@@ -15,11 +15,7 @@ const CarCard = () => {
                 <div className="flex h-full">
                     <div className="w-1/5 h-full flex">
                         <img src="/img/bag.png" alt="gwc" className="relative w-44 -top-2 h-20" onClick={() => {
-                            if (display) {
-                                setDisplay("")
-                            } else {
-                                setDisplay("hidden")
-                            }
+                            setDisplay(d => !d)
                         }}/>
                         <div
                             className={clsx(totalAmount === 0 ? "" : "rounded-full bg-red-500 w-5 h-5 text-center absolute left-10 -top-2",)}>
@@ -40,9 +36,7 @@ const CarCard = () => {
                     </div>
                 </div>
             </div>
-            <div className={display}>
-                <CarDetails/>
-            </div>
+            <CarDetails open={display} setOpen={setDisplay}/>
         </>
 
     );

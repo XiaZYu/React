@@ -1,15 +1,26 @@
 import React, {useContext} from 'react';
 import {CarContext} from "../../Store/CarContext";
 import Meal from "../Meal";
+import clsx from "clsx";
 
-const CarDetails = () => {
+const CarDetails = ({
+    open,
+    setOpen
+}) => {
         const {carList, removeAll} = useContext(CarContext)
         return (
-            <BackDrop>
-                <div className="z-20 absolute bg-white w-full h-5/6 bottom-0 rounded-t-2xl overflow-auto">
-                    <div className="w-full h-12 flex justify-between">
-                        <p className="top-3 left-5 relative text-black font-bold text-xl">餐品详情</p>
-                        <button className="relative right-5 top-4 flex text-gray-400" onClick={removeAll}>
+            <div className={clsx(
+                !open && "hidden"
+            )}>
+                <div
+                    className="absolute w-full h-full top-0 right-0 left-0 bottom-0 m-auto bg-black/50 z-10"
+                    onClick={() => setOpen(false)}
+                />
+                <div className="flex flex-col py-2 z-20 absolute bg-white w-full bottom-0 max-h-[80%] rounded-t-2xl overflow-auto">
+                    <div className="flex flex-row items-center justify-between px-3">
+                    <p className="text-black font-bold text-xl">餐品详情</p>
+                    {!!carList?.length && (
+                        <button className="flex text-gray-400" onClick={removeAll}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                                  stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -17,19 +28,33 @@ const CarDetails = () => {
                             </svg>
                             清空购物车
                         </button>
+
+                    )}
                     </div>
-                    <hr/>
-                    <div className="overflow-auto">
+                    <div className="overflow-auto pb-32">
+                        {!carList?.length && (
+                            <div className="py-24 flex items-center justify-center text-gray-600">
+                                空空如也
+                            </div>
+                        )}
                         {carList.map(item => {
                             return (
                                 <div key={item.id} className="w-full h-28 mt-3 flex justify-between">
-                                    {carList.length === 0 ? "" : <Meal key={item.id} data={item} location={1}/>}
+                                    {carList && carList.length > 0 && (
+                                        <Meal
+                                            key={item.id}
+                                            id={item.id}
+                                            image={item.img}
+                                            title={item.title}
+                                            price={`¥${item.price * item.amount}`}
+                                        />
+                                    )}
                                 </div>
                             )
                         })}
                     </div>
                 </div>
-            </BackDrop>
+            </div>
         );
     }
 ;
