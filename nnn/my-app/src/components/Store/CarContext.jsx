@@ -10,8 +10,6 @@ export const CarContext = React.createContext({
 });
 export const CarProvider = ({children}) => {
 
-    // const [totalAmount, setTotalAmount] = useState(0)
-    // const [totalPrice, setTotalPrice] = useState(0)
     const [carList, setCarList] = useState([])
 
     const totalPrice = useMemo(() => {
@@ -36,7 +34,6 @@ export const CarProvider = ({children}) => {
                     amount: 1
                 }
             ])
-            item.amount = 1
         } else {
             setCarList(list => [
                 ...list.filter(product => product.id !== item.id),
@@ -45,7 +42,6 @@ export const CarProvider = ({children}) => {
                     amount: findProduct.amount + 1
                 }
             ])
-            item.amount += 1
         }
     }
 
@@ -65,8 +61,11 @@ export const CarProvider = ({children}) => {
                     }
                 ])
             }
-            item.amount -= 1;
         }
+    }
+
+    const removeAll = () => {
+        setCarList([])
     }
 
     return (
@@ -75,7 +74,8 @@ export const CarProvider = ({children}) => {
             totalPrice,
             carList,
             addItem,
-            removeItem
+            removeItem,
+            removeAll
         }}>
             {children}
         </CarContext.Provider>

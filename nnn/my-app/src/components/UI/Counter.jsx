@@ -4,12 +4,12 @@ import {CarContext} from "../Store/CarContext";
 const Counter = ({
     data
 }) => {
-    const { addItem, removeItem} = useContext(CarContext);
+    const {addItem, removeItem} = useContext(CarContext);
     return (
         <div className="flex">
         {(data.amount !== 0 && data.amount)?
             <>
-                <svg className="w-6 h-6 mt-0.5" onClick={() => (removeItem(data))}
+                <svg className="w-6 h-6 mt-0.5" onClick={() => (removeItem(data)) }
                      xmlns="http://www.w3.org/2000/svg"
                      fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round"

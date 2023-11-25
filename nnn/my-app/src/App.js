@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import Meals from "./components/Meals/Meals";
 import {CarProvider} from "./components/Store/CarContext";
 import FilterMeals from "./components/Meals/FilterMeals";
-import CarCard from "./components/Meals/CarCard";
+import CarCard from "./components/Meals/Car/CarCard";
 
 const defaultMealsList = [
     {
@@ -61,14 +61,14 @@ const App = () => {
         }else {
             setMealsList(defaultMealsList.filter(item => item.title.includes(keyword)))
         }
-    }, [mealsList])
+    }, [])
 
 
     return (
         <CarProvider>
             <div style={{width:390,height:744}} className="left-0 right-0 m-auto border-black border relative top-2">
                 <FilterMeals filterMeals={filterMeals}/>
-                <Meals data={mealsList} />
+                <Meals data={mealsList}/>
                 <CarCard/>
             </div>
         </CarProvider>
