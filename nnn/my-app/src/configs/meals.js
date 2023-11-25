@@ -1,10 +1,4 @@
-import React, {useCallback, useState} from 'react';
-import Meals from "./components/Meals/Meals";
-import {CarProvider} from "./components/Store/CarContext";
-import FilterMeals from "./components/Meals/FilterMeals";
-import CarCard from "./components/Meals/Car/CarCard";
-
-const defaultMealsList = [
+const defaultMeals = [
     {
         id: '1',
         title: '汉堡包',
@@ -52,27 +46,4 @@ const defaultMealsList = [
     }
 ];
 
-const App = () => {
-    const [mealsList, setMealsList] = useState(defaultMealsList);
-
-    const filterMeals = useCallback((keyword) => {
-        if (keyword === ""){
-            setMealsList(defaultMealsList);
-        }else {
-            setMealsList(defaultMealsList.filter(item => item.title.includes(keyword)))
-        }
-    }, [])
-
-
-    return (
-        <CarProvider>
-            <div style={{width:390,height:744}} className="left-0 right-0 m-auto border-black border relative top-2">
-                <SearchInput searchValue={searchValue} setSearchValue={setSearchValue}/>
-                <Meals list={filterList} />
-                <CarCard/>
-            </div>
-        </CarProvider>
-    );
-};
-
-export default App;
+export default defaultMeals

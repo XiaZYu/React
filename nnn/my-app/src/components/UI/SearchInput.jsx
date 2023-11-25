@@ -1,7 +1,8 @@
 import React from 'react';
 
-const FilterMeals = ({
-    filterMeals
+const SearchInput = ({
+    searchValue,
+    setSearchValue
 }) => {
     return (
         <div className="p-0.5">
@@ -10,11 +11,12 @@ const FilterMeals = ({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
                 <input
+                    value={searchValue}
                     style={{width:350}}
                     className="border rounded-xl pl-8 bg-gray-200 outline-none hover:border-none h-6"
                     type="text" placeholder={"请输入关键字"}
                     onChange={(e) => {
-                        filterMeals(e.target.value.trim())
+                        setSearchValue(e.target.value)
                     }}
                 />
             </div>
@@ -22,4 +24,4 @@ const FilterMeals = ({
     );
 };
 
-export default FilterMeals;
+export default SearchInput;

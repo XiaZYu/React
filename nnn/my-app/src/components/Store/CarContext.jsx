@@ -6,7 +6,7 @@ export const CarContext = React.createContext({
     totalPrice:0,
     addItem: null,
     removeItem: null,
-
+    removerAll: null
 });
 export const CarProvider = ({children}) => {
 
