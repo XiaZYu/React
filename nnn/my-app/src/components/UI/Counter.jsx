@@ -5,7 +5,8 @@ const Counter = ({
     data
 }) => {
     const { addItem, removeItem} = useContext(CarContext);
-    return (<div className="flex">
+    return (
+        <div className="flex">
         {(data.amount !== 0 && data.amount)?
             <>
                 <svg className="w-6 h-6 mt-0.5" onClick={() => (removeItem(data))}

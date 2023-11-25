@@ -16,8 +16,7 @@ export const CarProvider = ({children}) => {
 
     const totalPrice = useMemo(() => {
         // 根据 购物车列表计算当前所有商品的价格
-        return carList.map(item => item.price).reduce((a, b) => a + b, 0) ?? 0
-
+        return carList.map(item => item.price * item.amount).reduce((a, b) => a + b, 0) ?? 0
         // 监听了carList
     }, [carList])
 
@@ -55,7 +54,7 @@ export const CarProvider = ({children}) => {
         if(findProduct) {
             // 如果现存商品数量为 1，直接删掉
             if (findProduct.amount === 1) {
-                setCarList(list => list.filter(product => product.id === item.id))
+                setCarList(list => list.filter(product => product.id !== item.id))
             } else {
                 // 否则减去数量 1
                 setCarList(list => [
