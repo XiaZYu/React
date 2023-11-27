@@ -1,12 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {CarContext} from "../../Store/CarContext";
 import clsx from "clsx";
 import CarDetails from "./CarDetails";
+import CheckOut from "./CheckOut";
 
 const CarCard = () => {
 
     const {carList, totalPrice, totalAmount} = useContext(CarContext);
-    const [display, setDisplay] = React.useState(false);
+    const [display, setDisplay] = useState(false);
+    const [open, setOpen] =useState(false);
 
     return (
         <>
@@ -32,10 +34,13 @@ const CarCard = () => {
                     </div>
                     <div
                         className={clsx("flex  ml-2 w-1/2 rounded-full", carList.length === 0 ? "bg-neutral-700" : "bg-amber-400")}>
-                        <p className={clsx("top-0 bottom-0 m-auto", carList.length === 0 ? "text-gray-400" : "text-black")}>去结算</p>
+                        <span className={clsx("top-0 bottom-0 m-auto", carList.length === 0 ? "text-gray-400" : "text-black")} onClick={() => {
+                            carList.length !== 0 && setOpen(e => !e);
+                        }}>去结算</span>
                     </div>
                 </div>
             </div>
+            <CheckOut open={open} setOpen={setOpen}/>
             <CarDetails open={display} setOpen={setDisplay}/>
         </>
 

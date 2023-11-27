@@ -39,7 +39,7 @@ const CarDetails = ({
                         )}
                         {carList.map(item => {
                             return (
-                                <div key={item.id} className="w-full h-28 mt-3 flex justify-between">
+                                <div key={item.id} className="w-full h-28 mt-3 flex justify-between divide-y-0">
                                     {carList && carList.length > 0 && (
                                         <Meal
                                             key={item.id}
