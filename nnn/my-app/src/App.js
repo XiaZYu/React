@@ -3,7 +3,6 @@ import Meals from "./components/Meals/Meals";
 import {CarProvider} from "./components/Store/CarContext";
 import SearchInput from "./components/UI/SearchInput";
 import CarCard from "./components/Meals/Car/CarCard";
-import defaultMeals from "./configs/meals";
 
 const App = () => {
     const [mealsList, setMealsList] = useState([]);
@@ -12,14 +11,22 @@ const App = () => {
 
     const filterList = useMemo(() => {
         return mealsList.filter(item =>
-            item.title.includes(searchValue)
+            item.attributes.title.includes(searchValue)
         )
 
     }, [mealsList, searchValue])
 
     useEffect(() => {
         // 从接口获取商品列表
-        setMealsList(defaultMeals)
+        const aaa = async () => {
+            const res = await fetch("http://localhost:1337/api/meals");
+            const data = await res.json();
+            console.log(data.data)
+            setMealsList(data.data);
+            console.log(mealsList)
+        };
+
+        aaa();
     }, [])
 
 

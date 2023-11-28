@@ -10,10 +10,10 @@ const Meals = ({
                     <Meal
                         key={item.id}
                         id={item.id}
-                        image={item.img}
-                        title={item.title}
-                        description={item.desc}
-                        price={`¥${item.price}`}
+                        image={item.attributes.img}
+                        title={item.attributes.title}
+                        description={item.attributes.desc}
+                        price={`¥${item.attributes.price}`}
                     />
                 ))
             }
