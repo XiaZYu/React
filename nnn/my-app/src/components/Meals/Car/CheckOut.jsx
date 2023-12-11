@@ -32,9 +32,9 @@ const CheckOut = ({
                                         <Meal
                                             key={item.id}
                                             id={item.id}
-                                            image={item.img}
-                                            title={item.title}
-                                            price={`¥${item.price * item.amount}`}
+                                            image={item.attributes.img}
+                                            title={item.attributes.title}
+                                            price={`¥${item.attributes.price * item.amount}`}
                                             countCompetent={true}
                                         />
                                     )}

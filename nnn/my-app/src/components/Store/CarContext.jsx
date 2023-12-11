@@ -17,7 +17,7 @@ export const CarProvider = ({
 
     const totalPrice = useMemo(() => {
         // 根据 购物车列表计算当前所有商品的价格
-        return carList.map(item => item.price * item.amount).reduce((a, b) => a + b, 0) ?? 0
+        return carList.map(item => item.attributes.price * item.amount).reduce((a, b) => a + b, 0) ?? 0
         // 监听了carList
     }, [carList])
 
@@ -49,6 +49,8 @@ export const CarProvider = ({
                 return item
             }))
         }
+        console.log(carList)
+        console.log(totalPrice)
     }
 
     const removeItem = (mealId) =>{

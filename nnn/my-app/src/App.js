@@ -32,7 +32,7 @@ const App = () => {
 
     return (
         <CarProvider allMeals={mealsList}>
-            <div style={{width:390,height:744}} className="left-0 right-0 m-auto border-black border relative top-2">
+            <div style={{width:390,height:564}} className="left-0 right-0 m-auto border-black border relative top-2">
                 <SearchInput searchValue={searchValue} setSearchValue={setSearchValue}/>
                 <Meals list={filterList} />
                 <CarCard/>

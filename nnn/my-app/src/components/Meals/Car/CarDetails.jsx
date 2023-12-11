@@ -42,11 +42,11 @@ const CarDetails = ({
                                 <div key={item.id} className="w-full h-28 mt-3 flex justify-between divide-y-0">
                                     {carList && carList.length > 0 && (
                                         <Meal
-                                            key={item.id}
-                                            id={item.id}
-                                            image={item.img}
-                                            title={item.title}
-                                            price={`¥${item.price * item.amount}`}
+                                            key={item.attributes.id}
+                                            id={item.attributes.id}
+                                            image={item.attributes.img}
+                                            title={item.attributes.title}
+                                            price={`¥${item.attributes.price * item.amount}`}
                                         />
                                     )}
                                 </div>
